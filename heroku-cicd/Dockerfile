@@ -12,4 +12,4 @@ RUN touch .netrc
 
 ADD .netrc ./
 ADD update_netrc.sh ./ 
-
+ADD healthcheck.sh ./
