@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Check the health of the web service every thirty-seconds
 # for up to ten minutes, until it responds with HTTP status 200.
@@ -6,6 +6,7 @@
 # command: healthcheck.sh https://gb-church-api.herokuapp.com/healthcheck
 
 fail_count=1
+max_count=5
 while true
 do
   http_status=$(curl --write-out %{http_code} --silent --output /dev/null $1)
@@ -14,11 +15,11 @@ do
     echo "$(date -u) health check succeeded to $1"
     exit 0
   else
-    if [ "$fail_count" -eq "21" ]; then
+    if [ "$fail_count" -eq "$max_count" ]; then
       echo "$(date -u) health check failed (status $http_status) to $1"
       exit 2
     else
-      echo "$(date -u) health check ${fail_count}/20 to $1"
+      echo "$(date -u) health check ${fail_count}/${max_count} to $1"
       sleep 30
       fail_count=$[$fail_count +1]
     fi

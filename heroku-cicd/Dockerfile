@@ -1,6 +1,6 @@
 FROM docker:stable
 
-RUN apk add --no-cache nodejs npm
+RUN apk add --no-cache nodejs npm curl
 
 RUN npm install -g heroku 
 
