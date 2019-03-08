@@ -21,7 +21,7 @@ do
     else
       echo "$(date -u) health check ${fail_count}/${max_count} to $1"
       sleep 30
-      fail_count=$[$fail_count+1]
+      fail_count=$[$fail_count +1]
     fi
   fi
 done
