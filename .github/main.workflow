@@ -6,6 +6,7 @@ workflow "main" {
 action "build_and_tag_image" {
   uses = "docker://gabsdevops/docker-cicd"
   runs = "ls"
+  runs = "ls"
 }
 
 action "push_docker_hub" {
