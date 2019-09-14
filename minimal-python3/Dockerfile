@@ -1,6 +1,9 @@
 FROM alpine:3.8
 
-RUN apk add --no-cache python3 python3-dev
+ENV TZ=America/Sao_Paulo
+
+RUN apk add --no-cache python3 python3-dev tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
