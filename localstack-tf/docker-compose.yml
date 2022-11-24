@@ -1,0 +1,21 @@
+version: "3"
+services:
+  localstack:
+    container_name: localstack
+    image: gabsdevops/localstack-tf
+    ports:
+      - "4566:4566"
+      - "${PORT_WEB_UI-8899}:${PORT_WEB_UI-8899}"
+    environment:
+      - SERVICES=${SERVICES-dynamodb}
+      - DEBUG=${DEBUG- }
+      - DATA_DIR=${DATA_DIR- }
+      - PORT_WEB_UI=${PORT_WEB_UI-8899}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOSTNAME=localstack
+      - HOSTNAME_EXTERNAL=localstack
+      - HOST_TMP_FOLDER=${TMPDIR}
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "./scripts/terraform:/tmp/terraform"
+      - "./scripts/create-localstack-resources.sh:/docker-entrypoint-initaws.d/create-localstack-resources.sh"
